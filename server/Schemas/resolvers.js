@@ -3,38 +3,59 @@ const { signToken } = require("../utils/auth");
 const { AuthenticationError } = require("apollo-server-express");
 const { User, Message } = require("../models");
 
-const users = [
-  {
-    id: "1",
-    username: "john_doe",
-    email: "john@example.com",
-  },
-  {
-    id: "2",
-    username: "jane_smith",
-    email: "jane@example.com",
-  },
-  // Add more user data here
-];
-
 const resolvers = {
   Query: {
-    user: (parent, { id }) => {
-      return users.find((user) => user.id === id);
+    user: async (parent, { id }) => {
+      try {
+        return await User.findById(id).populate("messages");
+      } catch (err) {
+        throw new Error(`Failed to fetch user: ${err}`);
+      }
     },
-    users: () => {
-      return users;
+    users: async () => {
+      try {
+        return await User.find().populate("messages");
+      } catch (err) {
+        throw new Error(`Failed to fetch users: ${err}`);
+      }
+    },
+    message: async (parent, { id }) => {
+      try {
+        return await Message.findById(id).populate("username");
+      } catch (err) {
+        throw new Error(`Failed to fetch message: ${err}`);
+      }
+    },
+    messages: async () => {
+      try {
+        return await Message.find().populate("username");
+      } catch (err) {
+        throw new Error(`Failed to fetch messages: ${err}`);
+      }
     },
   },
   Mutation: {
-    createUser: (parent, { username, email }) => {
-      const newUser = {
-        id: String(users.length + 1),
-        username,
-        email,
-      };
-      users.push(newUser);
-      return newUser;
+    createUser: async (parent, { username, email, password }) => {
+      try {
+        const user = await User.create({ username, email, password });
+        const token = signToken(user);
+        return { token, user };
+      } catch (err) {
+        throw new Error(`Failed to create user: ${err}`);
+      }
+    },
+    createMessage: async (parent, { messageText, username }) => {
+      try {
+        const message = await Message.create({ messageText, username });
+        const user = await User.findByIdAndUpdate(
+          { _id: username },
+          { $push: { messages: message._id } },
+          { new: true }
+        );
+        return message;
+      } catch (err) {
+        throw new Error(`Failed to create message: ${err}`);
+      }
     },
   },
 };

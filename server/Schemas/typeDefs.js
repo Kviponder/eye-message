@@ -7,13 +7,23 @@ type User {
     email: String!
   }
 
+  type Message {
+    _id: ID!
+    messageText: String!
+    createdAt: String!
+    username: User!
+  }
+
   type Query {
     user(id: ID!): User
     users: [User]
+    message(id: ID!): Message
+    messages: [Message]
   }
 
   type Mutation {
     createUser(username: String!, email: String!): User
+    createMessage(messageText: String!, username: ID!): Message
   }
 `
 
