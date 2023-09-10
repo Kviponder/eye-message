@@ -1,5 +1,7 @@
 const { gql } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
+const { AuthenticationError } = require("apollo-server-express");
+const { User, Message } = require("../models");
 
 const users = [
   {
