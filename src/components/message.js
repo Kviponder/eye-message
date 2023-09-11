@@ -1,7 +1,18 @@
-export default function Message() {
+import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+
+const Message = ({ text }) => {
   return (
-    <div>
-      <h3>Message</h3>
-    </div>
+    <Container>
+      <Row>
+        <Col>
+          <div className="message">
+            <p>{text}</p>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
-}
+};
+
+export default Message;

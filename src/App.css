@@ -1,24 +1,34 @@
-.App {
-  text-align: center;
+/* Reset some default browser styles */
+body, h1, h2, p {
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Apply styles to the body */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
 }
 
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Style the main heading (h1) */
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+/* Style subheadings (h2) */
+h2 {
+  font-size: 2rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+/* Style paragraphs (p) */
+p {
+  font-size: 1rem;
+  margin-bottom: 20px;
 }
