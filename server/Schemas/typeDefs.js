@@ -6,6 +6,7 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
+    token: String
   }
 
   type Message {
@@ -20,11 +21,19 @@ const typeDefs = gql`
     users: [User]
     message(id: ID!): Message
     messages: [Message]
+    isLoggedIn: Boolean
+  }
+
+  type Auth {
+    token: String
+    user: User
   }
 
   type Mutation {
-    createUser(username: String!, email: String!, password: String!): User
+    createUser(username: String!, email: String!, password: String!): User    
     createMessage(messageText: String!, username: ID!): Message
+    login(email: String!, password: String!): Auth
+    logout: User
   }
 `;
 

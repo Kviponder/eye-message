@@ -1,4 +1,3 @@
-const { gql } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 const { AuthenticationError } = require("apollo-server-express");
 const { User, Message } = require("../models");
@@ -39,13 +38,14 @@ const resolvers = {
       try {
         const user = await User.create({ username, email, password });
         const token = signToken(user);
-        return { token, user };
+        return { token, user, username: user.username, email: user.email };
       } catch (err) {
         throw new Error(`Failed to create user: ${err}`);
       }
     },
-    createMessage: async (parent, { messageText, username }) => {
+    createMessage: async (parent, { input }) => {
       try {
+        const { messageText, username } = input;
         const message = await Message.create({ messageText, username });
         const user = await User.findByIdAndUpdate(
           { _id: username },
@@ -55,6 +55,42 @@ const resolvers = {
         return message;
       } catch (err) {
         throw new Error(`Failed to create message: ${err}`);
+      }
+    },
+    login: async (parent, { email, password }) => {
+      try {
+        const user = await User.findOne({ email });
+
+        if (!user) {
+          throw new AuthenticationError("User not found");
+        }
+
+        const correctPassword = await user.isCorrectPassword(password);
+
+        if (!correctPassword) {
+          throw new AuthenticationError("Incorrect password");
+        }
+
+        const token = signToken(user);
+
+        return { token, user };
+      } catch (err) {
+        throw new AuthenticationError(`Failed to log in: ${err}`);
+      }
+    },
+    logout: async (parent, args, context) => {
+      try {
+        if (context.user) {
+          const user = await User.findByIdAndUpdate(
+            { _id: context.user._id },
+            { online: false },
+            { new: true }
+          );
+          return user;
+        }
+        throw new AuthenticationError("You need to be logged in!");
+      } catch (err) {
+        throw new AuthenticationError(`Failed to log out: ${err}`);
       }
     },
   },
