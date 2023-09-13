@@ -1,15 +1,26 @@
+import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export default function home() {
+const Home = () => {
   return (
-    <Container>
-      <Row>
-        <Col>
-          <h1>Home</h1>
-          <p>Welcome to the Home page.</p>{" What"}
-        </Col>
-      </Row>
-    </Container>
+    <div className="flex-center">
+      <Container className="form-container">
+        <Row>
+          <Col>
+            <h1>Instant Messaging App</h1>
+            <p>Welcome to the Instant Messaging App.</p>
+            <Link to="/Login">
+              <button className="form-button">Log In</button>
+            </Link>
+            <Link to="/Signup">
+              <button className="form-button">Sign Up</button>
+            </Link>
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
-}
+};
+
+export default Home;

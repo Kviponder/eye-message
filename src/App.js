@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client"; // Import ApolloProvider
-import client from "./index"; // Import your Apollo Client instanc
+import client from "./index"; // Import your Apollo Client instance
 
 import Home from "./components/home";
 // import Profile from "./components/profile";

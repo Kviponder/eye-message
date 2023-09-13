@@ -1,4 +1,4 @@
-/* Reset some default browser styles */
+/* set some default browser styles */
 body, h1, h2, p {
   margin: 0;
   padding: 0;
@@ -20,15 +20,291 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* Style subheadings (h2) */
+
+/* Heading styles */
 h2 {
-  font-size: 2rem;
-  margin-top: 20px;
+  font-size: 24px;
   margin-bottom: 10px;
+  color: #007bff; /* Set the heading color to the primary color */
 }
 
-/* Style paragraphs (p) */
+/* Paragraph styles */
 p {
-  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+
+/* Container styles */
+.Cont {
+  background-color: #007bff; /* Set the background color to a primary color */
+  padding: 10px;
+}
+
+/* Row styles */
+.Row {
+  justify-content: space-between; /* Center the navigation items horizontally */
+  background-color: #007bff; /* Set the background color to a primary color */
+}
+
+/* Button styles */
+.btn {
+  background-color: #fff; /* Set the button background color to white */
+  color: #007bff; /* Set the button text color to the primary color */
+  margin: 5px; /* Add some margin to space out the buttons */
+  border: none; /* Remove button borders */
+  padding: 10px 20px; /* Add padding to the buttons */
+  border-radius: 5px; /* Add rounded corners to the buttons */
+  text-decoration: none; /* Remove underlines from button links */
+  font-weight: bold; /* Make the text bold */
+  transition: background-color 0.3s ease-in-out; /* Add a smooth transition effect */
+}
+
+/* Change button background color on hover */
+.btn:hover {
+  background-color: #0056b3; /* Change the background color on hover */
+  color: #fff; /* Change the text color on hover */
+  text-decoration: none; /* Remove underlines on hover */
+}
+
+.btn:active,
+.btn:focus {
+  background-color: #01438a; 
+}
+
+/* Add custom styles for the Logout button */
+.btn-logout {
+  background-color: #dc3545; /* Set the background color to a danger color */
+  color: #fff; 
+}
+
+/* Change Logout button background color on hover */
+.btn-logout:hover {
+  background-color: #c82333; /* Change the background color on hover */
+}
+
+
+/* Container styles */
+.flex-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Center the form vertically on the screen */
+}
+
+/* Form container styles */
+.form-container {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 70px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 40%; /* Adjust the width as needed */
+  text-align: center;
+}
+
+/* Input styles */
+.form-input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Button styles */
+.form-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Change button background color on hover */
+.form-button:hover {
+  background-color: #0056b3;
+}
+
+/* Error message styles */
+.form-error {
+  color: #dc3545; /* Set the error message color to a danger color */
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+
+/* Center the content vertically and horizontally */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Style the container */
+.form-container {
+  background-color: #f8f9fa; /* Light gray background color */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Style the title */
+h1 {
+  font-size: 36px;
+  color: #343a40; /* Dark gray text color */
   margin-bottom: 20px;
 }
+
+/* Style the description */
+p {
+  font-size: 18px;
+  color: #6c757d; /* Medium gray text color */
+  margin-bottom: 30px;
+}
+
+/* Style the buttons */
+.form-button {
+  background-color: #007bff; /* Primary button color */
+  color: #fff; /* Text color for the buttons */
+  border: none;
+  padding: 10px 20px;
+  width: 40%;
+  font-size: 18px;
+  border-radius: 4px;
+  text-decoration: none;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for buttons */
+.form-button:hover {
+  background-color: #0056b3; /* Darker shade of primary color */
+}
+
+.Container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Style the row to center the buttons */
+.Row {
+  display: flex;
+  justify-content: center;
+}
+
+/* Style the buttons */
+.Button {
+  margin: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+/* Style the primary buttons */
+.Button.variant-primary {
+  background-color: #007bff; /* Primary button color */
+  color: #fff; /* Text color */
+  border: none; /* Remove button border */
+}
+
+.Button.variant-primary:hover {
+  background-color: #0056b3; /* Button color on hover */
+}
+
+/* Style the danger button */
+.Button.variant-danger {
+  background-color: #dc3545; /* Danger button color */
+  color: #fff; /* Text color */
+  border: none; /* Remove button border */
+}
+
+.Button.variant-danger:hover {
+  background-color: #c82333; /* Button color on hover */
+}
+
+/* signupForm.css */
+
+/* signupForm.css */
+
+/* Style the signup container */
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  border: 1px solid #ddd; /* Change border color to match the form container */
+  border-radius: 5px; /* Reduce border-radius */
+  margin: 2rem auto;
+  max-width: 400px;
+  background-color: #fff;
+}
+
+/* Style the signup title */
+.signup-title {
+  font-size: 24px;
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+/* Style the signup form */
+.signup-form {
+  width: 100%;
+}
+
+/* Style the form label */
+form-label {
+  font-size: 16px;
+  color: #333;
+}
+
+/* Style the form control */
+.form-control {
+  font-size: 14px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  color: #333;
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+/* Style the alert message */
+.alert-danger {
+  margin-bottom: 1rem;
+  background-color: #dc3545;
+  color: #fff;
+  border-color: #dc3545;
+  border-radius: 5px;
+  padding: 0.75rem;
+  width: 100%;
+  text-align: center;
+}
+
+/* Style the signup button */
+.signup-button {
+  margin-top: 1rem;
+  font-size: 16px;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  width: 100%;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Hover style for the signup button */
+.signup-button:hover {
+  background-color: #0056b3;
+}
+
+/* Add more styles as needed */

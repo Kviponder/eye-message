@@ -1,43 +1,55 @@
 import React from "react";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Auth from "../utils/Auth";
+import authInstance from "../utils/Auth";
 
 const Navbar = () => {
   const handleLogout = () => {
-    Auth.logout(); // Remove the JWT token from local storage
+    authInstance.logout(); // Remove the JWT token from local storage
     window.location.replace("/"); // Redirect the user to the homepage or login page
   };
 
   return (
-    <Container>
-      <Row>
-        <Col>
-          {Auth.loggedIn() ? (
+    <Container className="Cont">
+      <Row className="Row">
+        <Col className="Col">
+          {authInstance.loggedIn() ? (
             <>
               <Link to="/Dashboard">
-                <Button variant="primary">Dashboard</Button>
+                <Button variant="primary" className="btn">
+                  Dashboard
+                </Button>
               </Link>
               <Link to="/MessageList">
-                <Button variant="primary">Messages</Button>
+                <Button variant="primary" className="btn">
+                  Messages
+                </Button>
               </Link>
               <Link to="/Profile">
-                <Button variant="primary">Profile</Button>
+                <Button variant="primary" className="btn">
+                  Profile
+                </Button>
               </Link>
-              <Button variant="danger" onClick={handleLogout}>
+              <Button variant="danger" onClick={handleLogout} className="btn">
                 Logout
               </Button>
             </>
           ) : (
             <>
               <Link to="/">
-                <Button variant="primary">Home</Button>
+                <Button variant="primary" className="btn">
+                  Home
+                </Button>
               </Link>
               <Link to="/Login">
-                <Button variant="primary">Login</Button>
+                <Button variant="primary" className="btn">
+                  Login
+                </Button>
               </Link>
               <Link to="/Signup">
-                <Button variant="primary">Signup</Button>
+                <Button variant="primary" className="btn">
+                  Signup
+                </Button>
               </Link>
             </>
           )}

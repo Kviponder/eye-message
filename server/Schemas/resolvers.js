@@ -71,29 +71,31 @@ const resolvers = {
           throw new AuthenticationError("Incorrect password");
         }
 
+        // Create and return a token here (if needed)
         const token = signToken(user);
 
         return { token, user };
       } catch (err) {
-        throw new AuthenticationError(`Failed to log in: ${err}`);
-      }
-    },
-    logout: async (parent, args, context) => {
-      try {
-        if (context.user) {
-          const user = await User.findByIdAndUpdate(
-            { _id: context.user._id },
-            { online: false },
-            { new: true }
-          );
-          return user;
-        }
-        throw new AuthenticationError("You need to be logged in!");
-      } catch (err) {
-        throw new AuthenticationError(`Failed to log out: ${err}`);
+        throw new AuthenticationError(`Failed to log in!: ${err}`);
       }
     },
   },
 };
+//   logout: async (parent, args, context) => {
+//     try {
+//       if (context.user) {
+//         const user = await User.findByIdAndUpdate(
+//           { _id: context.user._id },
+//           { online: false },
+//           { new: true }
+//         );
+//         return user;
+//       }
+//       throw new AuthenticationError("You need to be logged in!");
+//     } catch (err) {
+//       throw new AuthenticationError(`Failed to log out: ${err}`);
+//     }
+//   },
+// };
 
 module.exports = resolvers;
