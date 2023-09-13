@@ -15,7 +15,7 @@ const Dashboard = () => {
           {authInstance.loggedIn() ? (
             <h1>Dashboard</h1>
           ) : (
-            <h1>You are not logged in</h1>
+            <h1>You are not logged in loser</h1>
           )}
         </Col>
       </Row>

@@ -7,7 +7,7 @@ import Home from "./components/home";
 // import Profile from "./components/profile";
 import Dashboard from "./components/dashboard";
 import Signup from "./components/signup";
-import Login from "./components/Login";
+import Login from "./components/login";
 import MessageList from "./components/messageList";
 import Navbar from "./components/navbar";
 
