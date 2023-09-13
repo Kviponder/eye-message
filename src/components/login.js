@@ -14,8 +14,12 @@ const LoginForm = () => {
       const { data } = await login({
         variables: { email: email, password: password },
       });
+      const token = data.login.token;
+      login(token);
+      window.location.replace("/dashboard");
 
       // Handle successful login, e.g., store token and redirect user
+
       console.log("Login successful:", data.login.token);
     } catch (err) {
       console.error("Login error:", err);

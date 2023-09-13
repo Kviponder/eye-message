@@ -26,6 +26,7 @@ const SignupForm = () => {
       const { data } = await createUser({
         variables: formData,
       });
+      window.location.replace("/dashboard");
       console.log("User created:", data.createUser);
       // Handle successful signup, e.g., redirect user to login page
     } catch (err) {

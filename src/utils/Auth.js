@@ -2,15 +2,11 @@
 import decode from "jwt-decode";
 
 class Auth {
-  getProfile() {
-    return decode(this.getToken());
-  }
-
-  loggedIn() {
-    // Checks if there is a saved token and it's still valid
-    const token = this.getToken();
-    // use type coersion to check if token is NOT undefined and the token is NOT expired
-    return !!token && !this.isTokenExpired(token);
+  getToken() {
+    // Retrieves the user token from localStorage
+    const token = localStorage.getItem("id_token");
+    console.log("Token retrieved from local storage:", token);
+    return token;
   }
 
   // check if token is expired
@@ -25,15 +21,20 @@ class Auth {
     }
   }
 
-  getToken() {
-    // Retrieves the user token from localStorage
-    return localStorage.getItem("id_token");
+  login(token) {
+    // Saves user token to localStorage
+    localStorage.setItem("tokenID", token);
   }
 
-  login(idToken) {
-    // Saves user token to localStorage
-    localStorage.setItem("id_token", idToken);
-    window.location.assign("/");
+  getProfile() {
+    return decode(this.getToken());
+  }
+
+  loggedIn() {
+    // Checks if there is a saved token and it's still valid
+    const token = this.getToken();
+    // use type coersion to check if token is NOT undefined and the token is NOT expired
+    return !!token && !this.isTokenExpired(token);
   }
 
   logout() {
