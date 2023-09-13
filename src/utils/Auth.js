@@ -4,7 +4,7 @@ import decode from "jwt-decode";
 class Auth {
   getToken() {
     // Retrieves the user token from localStorage
-    const token = localStorage.getItem("id_token");
+    const token = localStorage.getItem("tokenID");
     console.log("Token retrieved from local storage:", token);
     return token;
   }
@@ -20,7 +20,6 @@ class Auth {
       return false;
     }
   }
-
   login(token) {
     // Saves user token to localStorage
     localStorage.setItem("tokenID", token);
@@ -39,7 +38,7 @@ class Auth {
 
   logout() {
     // Clear user token and profile data from localStorage
-    localStorage.removeItem("id_token");
+    localStorage.removeItem("tokenID");
     // this will reload the page and reset the state of the application
     window.location.assign("/");
   }

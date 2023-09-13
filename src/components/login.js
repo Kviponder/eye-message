@@ -1,25 +1,27 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { LOGIN_USER } from "../utils/mutations"; // Import your LOGIN_USER mutation query
+import { LOGIN_USER } from "../utils/mutations";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [login, { loading, error }] = useMutation(LOGIN_USER);
+  const [loginUser, { loading, error }] = useMutation(LOGIN_USER); // Changed the name from login to loginUser
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const { data } = await login({
+      const { data } = await loginUser({
+        // Changed from login to loginUser
         variables: { email: email, password: password },
       });
       const token = data.login.token;
-      login(token);
+      // Store the token in localStorage or wherever you need to
+      localStorage.setItem("tokenID", token);
+      // Redirect the user to the dashboard or another authenticated route
+      // You can use your preferred routing mechanism (e.g., react-router) for this.
+      // Example using react-router-dom:
       window.location.replace("/dashboard");
-
-      // Handle successful login, e.g., store token and redirect user
-
       console.log("Login successful:", data.login.token);
     } catch (err) {
       console.error("Login error:", err);
@@ -37,7 +39,7 @@ const LoginForm = () => {
             className="form-input"
             type="email"
             placeholder="Email"
-            name="email" // Ensure the name attribute matches your mutation arguments
+            name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -46,7 +48,7 @@ const LoginForm = () => {
             className="form-input"
             type="password"
             placeholder="Password"
-            name="password" // Ensure the name attribute matches your mutation arguments
+            name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -54,11 +56,7 @@ const LoginForm = () => {
           <button className="form-button" type="submit" disabled={loading}>
             {loading ? "Logging in..." : "Log In"}
           </button>
-          {error && (
-            <p className="form-error">
-              Error: {error.message} {/* Display the error message */}
-            </p>
-          )}
+          {error && <p className="form-error">Error: {error.message}</p>}
         </form>
       </div>
     </div>

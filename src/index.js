@@ -32,8 +32,8 @@ const root = createRoot(document.getElementById("root")); // Use createRoot from
 root.render(
   <ApolloProvider client={client}>
     <React.StrictMode>
-        {" "}
-        <App />
+      {" "}
+      <App />
     </React.StrictMode>
   </ApolloProvider>
 );

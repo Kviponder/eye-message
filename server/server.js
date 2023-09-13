@@ -22,7 +22,6 @@ async function startApolloServer(typeDefs, resolvers) {
 }
 startApolloServer(typeDefs, resolvers);
 
-
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 

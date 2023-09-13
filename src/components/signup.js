@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { Form, Button } from "react-bootstrap";
 import { CREATE_USER } from "../utils/mutations";
+import authInstance from "../utils/Auth";
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -26,7 +27,13 @@ const SignupForm = () => {
       const { data } = await createUser({
         variables: formData,
       });
+
+      // Use the newUserToken function from authInstance to save the new token
+      authInstance.login(data.createUser.token);
+
+      // Redirect the user to the dashboard or the appropriate page
       window.location.replace("/dashboard");
+
       console.log("User created:", data.createUser);
       // Handle successful signup, e.g., redirect user to login page
     } catch (err) {

@@ -1,5 +1,8 @@
 /* set some default browser styles */
-body, h1, h2, p {
+body,
+h1,
+h2,
+p {
   margin: 0;
   padding: 0;
 }
@@ -20,7 +23,6 @@ h1 {
   margin-bottom: 20px;
 }
 
-
 /* Heading styles */
 h2 {
   font-size: 24px;
@@ -33,7 +35,6 @@ p {
   margin-bottom: 20px;
   color: #555;
 }
-
 
 /* Container styles */
 .Cont {
@@ -69,20 +70,19 @@ p {
 
 .btn:active,
 .btn:focus {
-  background-color: #01438a; 
+  background-color: #01438a;
 }
 
 /* Add custom styles for the Logout button */
 .btn-logout {
   background-color: #dc3545; /* Set the background color to a danger color */
-  color: #fff; 
+  color: #fff;
 }
 
 /* Change Logout button background color on hover */
 .btn-logout:hover {
   background-color: #c82333; /* Change the background color on hover */
 }
-
 
 /* Container styles */
 .flex-center {
@@ -137,7 +137,6 @@ p {
   margin-top: 10px;
   font-size: 14px;
 }
-
 
 /* Center the content vertically and horizontally */
 .flex-center {
