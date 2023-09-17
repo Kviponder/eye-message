@@ -11,10 +11,10 @@ const Home = () => {
             <h1>Instant Messaging App</h1>
             <p>Welcome to the Instant Messaging App.</p>
             <Link to="/Login">
-              <button className="form-button">Log In</button>
+              <button className="home-btn">Log In</button>
             </Link>
             <Link to="/Signup">
-              <button className="form-button">Sign Up</button>
+              <button className="home-btn">Sign Up</button>
             </Link>
           </Col>
         </Row>

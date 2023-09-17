@@ -1,30 +1,26 @@
 const { type } = require("@testing-library/user-event/dist/type");
 const mongoose = require("mongoose");
 
-const messageSchema = new mongoose.Schema(
-  {
-    messageText: {
-      type: String,
-      required: true,
-      minlength: 1,
-      maxlength: 280,
-    },
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
-    username: {
+const messageSchema = new mongoose.Schema({
+  messageText: {
+    type: String,
+    required: true,
+    minlength: 1,
+    maxlength: 280,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  user: [
+    {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-  },
-  {
-    toJSON: {
-      virtuals: true,
-    },
-    id: false,
-  }
-);
+  ],
+});
+
+
 
 const Message = mongoose.model("Message", messageSchema);
 

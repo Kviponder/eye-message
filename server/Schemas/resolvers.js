@@ -11,25 +11,48 @@ const resolvers = {
         throw new Error(`Failed to fetch user: ${err}`);
       }
     },
+    userByName: async (parent, { username }) => {
+      try {
+        return await User.findOne({ username }).populate("messages");
+      } catch (err) {
+        throw new Error(`Failed to fetch user: ${err}`);
+      }
+    },
+
     users: async () => {
       try {
-        return await User.find().populate("messages");
+        return await User.find();
       } catch (err) {
         throw new Error(`Failed to fetch users: ${err}`);
       }
     },
     message: async (parent, { id }) => {
       try {
-        return await Message.findById(id).populate("username");
+        return await Message.findById(id);
       } catch (err) {
         throw new Error(`Failed to fetch message: ${err}`);
       }
     },
     messages: async () => {
       try {
-        return await Message.find().populate("username");
+        return await Message.find();
       } catch (err) {
         throw new Error(`Failed to fetch messages: ${err}`);
+      }
+    },
+    friend: async (parent, { input }) => {
+      try {
+        const { username } = input;
+        return await User.findOne({ username }).populate("friends");
+      } catch (err) {
+        throw new Error(`Failed to fetch friend: ${err}`);
+      }
+    },
+    friends: async () => {
+      try {
+        return await User.find().populate("friends");
+      } catch (err) {
+        throw new Error(`Failed to fetch friends: ${err}`);
       }
     },
   },
@@ -42,19 +65,57 @@ const resolvers = {
       } catch (err) {
         throw new Error(`Failed to create user: ${err}`);
       }
+      if (!user) {
+        throw new Error("User not found");
+      }
     },
-    createMessage: async (parent, { input }) => {
+    // createMessage: async (parent, args, context, { input }) => {
+    //   // if (!context.user) {
+    //   //   throw new AuthenticationError("Authentication required.");
+    //   // }
+    //   try {
+    //     args.user = context.user.username;
+
+    //     // Find the user by username
+    //     // const user = await User.findOne({ username });
+    //     const newMessage = await Message.create(args);
+    //     return newMessage;
+    //   } catch (err) {
+    //     throw new Error(`Failed to create message: ${err}`);
+    //   }
+    // },
+    createMessage: async (_, { input }) => {
       try {
+        // Validate input
         const { messageText, username } = input;
-        const message = await Message.create({ messageText, username });
-        const user = await User.findByIdAndUpdate(
-          { _id: username },
-          { $push: { messages: message._id } },
-          { new: true }
-        );
-        return message;
-      } catch (err) {
-        throw new Error(`Failed to create message: ${err}`);
+        if (!messageText || !username) {
+          throw new Error("Message text and username are required.");
+        }
+        // Find the user by username (assuming username is unique)
+        const user = await User.findOne({ username });
+        if (!user) {
+          throw new Error("User not found");
+        }
+        // Create a new message
+        const newMessage = new Message({
+          messageText,
+          user: user._id,
+        });
+        // Save the message to the database
+        await newMessage.save();
+        // Return the created message with the user
+        return {
+          user: {
+            _id: user._id,
+            username: user.username,
+            email: user.email,
+            token: user.token,
+          },
+          messageText: newMessage.messageText,
+          createdAt: newMessage.createdAt.toISOString(), // Format date as string
+        };
+      } catch (error) {
+        throw console.log(error);
       }
     },
     login: async (parent, { email, password }) => {
@@ -79,23 +140,33 @@ const resolvers = {
         throw new AuthenticationError(`Failed to log in!: ${err}`);
       }
     },
+    addFriend: async (_, { input }) => {
+      try {
+        const { userId, friendId } = input;
+
+        // Find the user and friend by their IDs
+        const user = await User.findById(userId);
+        const friend = await User.findById(friendId);
+
+        if (!user || !friend) {
+          throw new Error("User or friend not found");
+        }
+
+        // Check if the friend is already in the user's friends list
+        if (user.friends.includes(friendId)) {
+          throw new Error("Friend is already added");
+        }
+
+        // Add the friend to the user's friends list
+        user.friends.push(friendId);
+        await user.save();
+
+        return user;
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
   },
 };
-//   logout: async (parent, args, context) => {
-//     try {
-//       if (context.user) {
-//         const user = await User.findByIdAndUpdate(
-//           { _id: context.user._id },
-//           { online: false },
-//           { new: true }
-//         );
-//         return user;
-//       }
-//       throw new AuthenticationError("You need to be logged in!");
-//     } catch (err) {
-//       throw new AuthenticationError(`Failed to log out: ${err}`);
-//     }
-//   },
-// };
 
 module.exports = resolvers;

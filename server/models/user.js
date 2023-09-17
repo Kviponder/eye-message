@@ -26,6 +26,12 @@ const userSchema = new mongoose.Schema(
         ref: "Message",
       },
     ],
+    friends: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
     token: {
       type: String,
     },

@@ -5,7 +5,7 @@ export const LOGIN_USER = gql`
     login(email: $email, password: $password) {
       token
       user {
-        id
+        _id
         email
       }
     }
@@ -21,3 +21,34 @@ export const CREATE_USER = gql`
     }
   }
 `;
+
+export const CREATE_MESSAGE = gql`
+  mutation createMessage($messageText: String!, $username: ID!) {
+    createMessage(messageText: $messageText, username: $username) {
+      messageText
+      username {
+        username
+      }
+    }
+  }
+`;
+
+export const ADD_FRIEND = gql`
+  mutation AddFriend($username: String!) {
+    addFriend(username: $username) {
+      username
+      friends {
+        username
+        _id
+        friends {
+          friends {
+            username
+            _id
+          }
+        }
+      }
+    }
+  }
+`;
+
+

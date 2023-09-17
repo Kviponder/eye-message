@@ -5,22 +5,17 @@ import { LOGIN_USER } from "../utils/mutations";
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loginUser, { loading, error }] = useMutation(LOGIN_USER); // Changed the name from login to loginUser
+  const [loginUser, { loading, error }] = useMutation(LOGIN_USER);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const { data } = await loginUser({
-        // Changed from login to loginUser
         variables: { email: email, password: password },
       });
       const token = data.login.token;
-      // Store the token in localStorage or wherever you need to
       localStorage.setItem("tokenID", token);
-      // Redirect the user to the dashboard or another authenticated route
-      // You can use your preferred routing mechanism (e.g., react-router) for this.
-      // Example using react-router-dom:
       window.location.replace("/dashboard");
       console.log("Login successful:", data.login.token);
     } catch (err) {

@@ -5,7 +5,6 @@ class Auth {
   getToken() {
     // Retrieves the user token from localStorage
     const token = localStorage.getItem("tokenID");
-    console.log("Token retrieved from local storage:", token);
     return token;
   }
 
@@ -27,6 +26,18 @@ class Auth {
 
   getProfile() {
     return decode(this.getToken());
+  }
+
+  getUsername() {
+    const token = this.getToken();
+    const decoded = decode(token);
+    return decoded.data.username;
+  }
+
+  getFriends() {
+    const token = this.getToken();
+    const decoded = decode(token);
+    return decoded.data.friends;
   }
 
   loggedIn() {

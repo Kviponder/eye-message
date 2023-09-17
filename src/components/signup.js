@@ -27,15 +27,9 @@ const SignupForm = () => {
       const { data } = await createUser({
         variables: formData,
       });
-
-      // Use the newUserToken function from authInstance to save the new token
       authInstance.login(data.createUser.token);
-
-      // Redirect the user to the dashboard or the appropriate page
       window.location.replace("/dashboard");
-
       console.log("User created:", data.createUser);
-      // Handle successful signup, e.g., redirect user to login page
     } catch (err) {
       console.error("Signup error:", err);
     }
@@ -49,6 +43,7 @@ const SignupForm = () => {
           <Form.Control
             type="text"
             name="username"
+            placeholder="Enter username"
             value={formData.username}
             onChange={handleChange}
             required
@@ -60,6 +55,7 @@ const SignupForm = () => {
           <Form.Control
             type="email"
             name="email"
+            placeholder="Enter email"
             value={formData.email}
             onChange={handleChange}
             required
@@ -71,6 +67,7 @@ const SignupForm = () => {
           <Form.Control
             type="password"
             name="password"
+            placeholder="Enter password"
             value={formData.password}
             onChange={handleChange}
             required

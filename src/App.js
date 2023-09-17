@@ -4,7 +4,7 @@ import { ApolloProvider } from "@apollo/client"; // Import ApolloProvider
 import client from "./index"; // Import your Apollo Client instance
 
 import Home from "./components/home";
-// import Profile from "./components/profile";
+import Profile from "./components/profile";
 import Dashboard from "./components/dashboard";
 import Signup from "./components/signup";
 import Login from "./components/login";
@@ -22,6 +22,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/messageList" element={<MessageList />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </Router>
     </ApolloProvider>

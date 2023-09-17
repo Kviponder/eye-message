@@ -1,27 +1,6 @@
-// import React from 'react';
-// import { Container, Row, Col } from 'react-bootstrap';
-// import Message from './message';
-
-// const MessageList = ({ messages }) => {
-//   return (
-//     <Container>
-//       <Row>
-//         <Col>
-//           <h2>Message List</h2>
-//           {messages.map((message, index) => (
-//             <Message key={index} text={message} />
-//           ))}
-//         </Col>
-//       </Row>
-//     </Container>
-//   );
-// };
-
-// export default MessageList;
-
-import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Message from "./message";
+import authInstance from "../utils/Auth";
 
 const hardcodedMessages = [
   "Hello, how are you today?",
@@ -35,14 +14,23 @@ const hardcodedMessages = [
 ];
 
 const MessageList = () => {
+  const loggedIn = authInstance.loggedIn();
   return (
     <Container>
       <Row>
         <Col>
-          <h2>Message List</h2>
-          {hardcodedMessages.map((message, index) => (
-            <Message key={index} text={message} />
-          ))}
+          {loggedIn ? (
+            <div className="messageList">
+              <h2>Message List</h2>
+              {hardcodedMessages.map((message, index) => (
+                <Message key={index} text={message} />
+              ))}
+            </div>
+          ) : (
+            <div className="messageList">
+              <h1>You are not logged in loser</h1>
+            </div>
+          )}
         </Col>
       </Row>
     </Container>
